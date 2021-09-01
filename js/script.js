@@ -14,10 +14,14 @@ searchBtn.addEventListener('click', () => {
         errorMsg.innerText = 'Search Field Empty';
         return;
     }
-    // clear innerHTML after search
+    // clearing innerHTML after search
     booksContainer.innerHTML = '';
+    // clearing search result
+    resultFound.innerText = '';
+    // clearing error message
+    errorMsg.innerText = '';
 
-    const url = `http://openlibrary.org/search.json?q=${searchText}`;
+    const url = `https://openlibrary.org/search.json?q=${searchText}`;
 
     fetch(url)
     .then(res => res.json())
@@ -28,16 +32,23 @@ searchBtn.addEventListener('click', () => {
 })
 
 const showSearchResult = data => {
-    resultFound.innerText = `Showing Result of 100 from ${data.numFound}`;
+    resultFound.innerText = `Search Result Found: ${data.numFound} items`;
+    if(data.numFound === 0){
+        errorMsg.innerText = 'This Book Not Available'
+    }
+    else{
+        errorMsg.innerText = '';
+    }
     
     const books = data.docs;
     books.forEach(book => {
         // console.log(book);
+        
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
             <div class="card h-100">
-                <img height = "300px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top" alt="...">
+                <img height="300px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Book Name: ${book.title}</h5>
                     <p class="card-text">Authors: ${book.author_name}</p>
