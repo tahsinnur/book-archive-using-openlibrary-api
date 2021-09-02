@@ -3,6 +3,7 @@ const searchBtn = document.getElementById('search-btn');
 const booksContainer = document.getElementById('books-container');
 const resultFound = document.getElementById('result-found');
 const errorMsg = document.getElementById('error-msg');
+const spinner = document.getElementById('spinner');
 
 // Search Button Click Handler
 searchBtn.addEventListener('click', () => {
@@ -19,6 +20,8 @@ searchBtn.addEventListener('click', () => {
     resultFound.innerText = '';
     // clearing error message
     errorMsg.innerText = '';
+    // spinner
+    spinner.classList.remove('d-none');
 
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
 
@@ -27,6 +30,7 @@ searchBtn.addEventListener('click', () => {
     .then(data => showSearchResult(data))
     .finally(() => {
         searchInput.value = '';
+        spinner.classList.add('d-none');
     })
 })
 
