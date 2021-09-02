@@ -32,7 +32,9 @@ searchBtn.addEventListener('click', () => {
 })
 
 const showSearchResult = data => {
-    resultFound.innerText = `Search Result Found: ${data.numFound} items`;
+    const books = data.docs.slice(0, 40);
+
+    resultFound.innerText = `Showing Result of ${books.length} out of ${data.numFound} matching items`;
     if(data.numFound === 0){
         errorMsg.innerText = 'This Book Not Available'
     }
@@ -40,10 +42,8 @@ const showSearchResult = data => {
         errorMsg.innerText = '';
     }
     
-    const books = data.docs;
     books.forEach(book => {
-        // console.log(book);
-        
+        console.log(book.author_name);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -51,8 +51,9 @@ const showSearchResult = data => {
                 <img height="300px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Book Name: ${book.title}</h5>
-                    <p class="card-text">Authors: ${book.author_name}</p>
-                    <p class="card-text">First Published: ${book.first_publish_year}</p>
+                    <p class="card-text">Author: ${book.author_name ? book.author_name:'Unknown'}</p>
+                    <p class="card-text">Publisher: ${book.publisher ? book.publisher:'Unknown'}</p>
+                    <p class="card-text">First Published: ${book.first_publish_year ? book.first_publish_year:'Unknown'}</p>
                 </div>
             </div>
         `;
