@@ -9,7 +9,7 @@ const errorMsg = document.getElementById('error-msg');
 searchBtn.addEventListener('click', () => {
     searchText = searchInput.value;
 
-    // empty input field msg 
+    // empty input field error message 
     if(searchText === ''){
         errorMsg.innerText = 'Search Field Empty';
         return;
