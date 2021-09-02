@@ -1,6 +1,5 @@
 const searchInput = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-btn');
-
 const booksContainer = document.getElementById('books-container');
 const resultFound = document.getElementById('result-found');
 const errorMsg = document.getElementById('error-msg');
@@ -33,15 +32,20 @@ searchBtn.addEventListener('click', () => {
 
 const showSearchResult = data => {
     const books = data.docs.slice(0, 40);
+    
+    // showing total matching items and displaying items
+    resultFound.innerText = `Showing Result Of ${books.length} Out Of ${data.numFound} Matching Items`;
 
-    resultFound.innerText = `Showing Result of ${books.length} out of ${data.numFound} matching items`;
+    // error message for invalid input
     if(data.numFound === 0){
-        errorMsg.innerText = 'This Book Not Available'
+        errorMsg.innerText = 'This Book Is Not Available'
+        resultFound.innerText = '';
     }
     else{
         errorMsg.innerText = '';
     }
-    
+
+    // displaying search result dynamically
     books.forEach(book => {
         const div = document.createElement('div');
         div.classList.add('col');
