@@ -49,10 +49,10 @@ const showSearchResult = data => {
             <div class="card h-100">
                 <img height="300px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Book Title: ${book.title}</h5>
-                    <p class="card-text">Author: ${book.author_name ? book.author_name:'Unknown'}</p>
-                    <p class="card-text">Publisher: ${book.publisher ? book.publisher:'Unknown'}</p>
-                    <p class="card-text">First Published: ${book.first_publish_year ? book.first_publish_year:'Unknown'}</p>
+                    <h5 class="card-title">Book Title: <span class="text-primary">${book.title}</span></h5>
+                    <p class="card-text">Author: <span class="text-danger">${book.author_name ? book.author_name:'Unknown'}</span></p>
+                    <p class="card-text">Publisher: <span class="text-secondary">${book.publisher ? book.publisher:'Unknown'}</span></p>
+                    <p class="card-text">First Published: <span class="text-success">${book.first_publish_year ? book.first_publish_year:'Unknown'}</span></p>
                 </div>
             </div>
         `;
